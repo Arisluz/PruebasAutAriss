@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import random
 
-# Función para escribir con espera y pausa
+
 def wait_and_type(driver, by, value, text, wait, pause=1):
     element = wait.until(EC.visibility_of_element_located((by, value)))
     element.send_keys(text)
@@ -12,12 +12,12 @@ def wait_and_type(driver, by, value, text, wait, pause=1):
 
 def test_register_user(driver):
     driver.get("https://buggy.justtestit.org/")
-    time.sleep(1.5)  # Espera para que cargue la página
+    time.sleep(1.5) 
 
     driver.find_element(By.LINK_TEXT, "Register").click()
-    time.sleep(2)  # Espera tras clic en Register
+    time.sleep(2)  
 
-    wait = WebDriverWait(driver, 15)  # Aumentamos el tiempo de espera
+    wait = WebDriverWait(driver, 15)  
     username = f"user{random.randint(1000,9999)}"
     email = f"{username}@test.com"
     password = "Test1234!"
@@ -29,9 +29,9 @@ def test_register_user(driver):
     wait_and_type(driver, By.ID, "confirmPassword", password, wait, 1)
 
     driver.find_element(By.XPATH, '//button[text()="Register"]').click()
-    time.sleep(2)  # Esperar a que cargue la respuesta
+    time.sleep(2)  
 
-    # Esperamos que aparezca el mensaje de éxito
+    
     success_message = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "result")))
     assert "Registration is successful" in success_message.text
 
